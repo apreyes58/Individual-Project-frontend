@@ -1,1 +1,1 @@
-# Individual-project-frontend
+# Individual-Project-frontend
