@@ -20,7 +20,7 @@ const style = {
 	p: 4,
 };
 
-export default function BasicModal({ film_id, films }) {
+export default function BasicModalFilm({ film_id, films }) {
 	const [chosen, setChosen] = useState();
 	useEffect(() => {
 		if (Array.isArray(films) && films.length > 0) {

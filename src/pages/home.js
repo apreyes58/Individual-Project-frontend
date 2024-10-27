@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import BasicModal from '../components/filmui.js';
+import BasicModalFilm from '../components/filmui.js';
 import "../App.css";
+import BasicModalActor from '../components/actorui.js';
 
 function Home() {
     const [films, setFilms] = useState([]);
@@ -20,7 +21,7 @@ function Home() {
 
     return (
         <div className="App">
-            <h1>Welcome to the Film Website</h1>
+            <h1>Welcome to the Adrian's film website</h1>
             <div className="content-container">
                 <div className="films-section">
                     <h2>Top 5 Films</h2>
@@ -28,7 +29,7 @@ function Home() {
                         {films.map(film => (
                             <li className="child" key={film.film_id}>
                                 {film.title}
-                                <BasicModal film_id={film.film_id} films={films} />
+                                <BasicModalFilm film_id={film.film_id} films={films} />
                             </li>
                         ))}
                     </ul>
@@ -39,6 +40,7 @@ function Home() {
                         {actors.map(actor => (
                             <li className="child" key={actor.actor_id}>
                                 {actor.first_name} {actor.last_name}
+                                <BasicModalActor actor_id={actor.actor_id} actors={actors}/>
                             </li>
                         ))}
                     </ul>

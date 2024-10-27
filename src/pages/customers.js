@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import Pagination from "../components/pagination";
 import "../App.css";
+import BasicModalNewCustomer from "../components/newcustomerui";
+import BasicModalDeleteCustomer from "../components/deletecustomerui";
+import BasicModalEditCustomer from "../components/editcustomerui";
 
 function Customers() {
 	const [customers, setCustomers] = useState([]);
@@ -33,6 +36,16 @@ function Customers() {
 		setCurrentPage(page);
 	};
 
+	const getNew = () => {
+        fetch('http://localhost:8080/api/customers/list')
+            .then((response) => response.json())
+            .then((data) => setCustomers(data));
+    };
+
+	useEffect(() => {
+        getNew();
+    }, []);
+
 	return (
 		<div className="App">
 			<h1>Customers</h1>
@@ -42,6 +55,7 @@ function Customers() {
 				value={searchTerm}
 				onChange={(e) => setSearchTerm(e.target.value)}
 				style={{ width: "220px" }} />
+			<BasicModalNewCustomer updateList={getNew}/>
 
 			<div className="page-grid header-customer">
 				<div>Id</div>
@@ -64,6 +78,8 @@ function Customers() {
 							<div>{customer.active ? 'Yes' : 'No'}</div>
 							<div>{customer.create_date}</div>
 							<div>{customer.rental_count}</div>
+							<BasicModalEditCustomer customer={customer} updateList={getNew}/>
+							<BasicModalDeleteCustomer customer_id={customer.customer_id} updateList={getNew}/>
 						</div>
 					))
 				}
